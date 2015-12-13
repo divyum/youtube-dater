@@ -5,13 +5,13 @@ Ever wondered if you could get the published/uploaded date of related videos in 
 
 I made it coz I needed it. :wink:
 
+![YouTube Video List Dater](ytd_demo.png)
+
 ### To Install
 
-From the webstore:
+* From the webstore: [YouTube Video List Dater](https://chrome.google.com/webstore/detail/youtube-video-list-dater/mbaflkdlneldejanggphlhcepncjfaco) 
 
-[YouTube Video List Dater](https://chrome.google.com/webstore/detail/youtube-video-list-dater/mbaflkdlneldejanggphlhcepncjfaco) 
-
-For development:
+* For development:
 
 1. Clone this repo
 2. Open up Chrome and go to the extensions page (Window → Extensions)
