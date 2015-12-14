@@ -27,6 +27,6 @@ I made it coz I needed it. :wink:
 
 * ***v2.0 -***
 	
-	1. publish date of show_more
+	1. publish date of `show more` videos
 	2. run script on dom history change
 
