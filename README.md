@@ -23,3 +23,10 @@ I made it coz I needed it. :wink:
 
 *   Please report any bugs that you find as issues on the project
 
+### Update
+
+* ***v2.0 -***
+	
+	1. publish date of show_more
+	2. run script on dom history change
+
