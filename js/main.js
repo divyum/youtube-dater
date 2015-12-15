@@ -78,8 +78,12 @@ function main(tag) {
   }
   else
   {
-    sidebar_section = document.getElementsByClassName(tag)[0]
-    len = sidebar_section.children.length
+    if(document.getElementsByClassName(tag).length > 1){
+      sidebar_section = document.getElementsByClassName(tag)[0]
+      len = sidebar_section.children.length
+    }
+    else
+      return
   }
 
   for(var i=0; i<len; i++)
@@ -92,15 +96,6 @@ function main(tag) {
       {
         continue
       }
-    }
-
-    el_before_date = sidebar_section.children[i].children[0].children[0].children
-    has_date_pub = el_before_date[el_before_date.length-1].innerHTML.indexOf('Published')
-    has_date_up = el_before_date[el_before_date.length-1].innerHTML.indexOf('Uploaded')
-
-    if(has_date_pub >= 0 || has_date_up >=0 )
-    {
-      continue
     }
 
     if(tag == 'watch-related' || tag == 'watch-more-related')
