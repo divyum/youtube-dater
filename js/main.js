@@ -1,8 +1,60 @@
+var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+var oneDay = 24*60*60*1000;
+
+var current_date = new Date();
+current_date.setHours(0,0,0,0);
+
+function current_date_diff(published_date) {
+  published_date = published_date.replace(',', '').split(' ');
+  var published_date_len = published_date.length,
+      publish_day = parseInt(published_date[published_date_len - 2]),
+      published_month = months.indexOf(published_date[published_date_len - 3]),
+      published_year = parseInt(published_date[published_date_len - 1]);
+
+  new_date = new Date(published_year, published_month, publish_day);
+  var diff_days = Math.abs((current_date.getTime() - new_date.getTime())/(oneDay));
+  var prefix, suffix;
+  if(parseInt(diff_days) > 365)
+  {
+    prefix = parseInt(diff_days/365);
+    suffix = (prefix == 1 ? "year" : "years");
+  }
+  else if (parseInt(diff_days/30.43) > 0)
+  {
+    prefix = parseInt(diff_days/30.43);
+    suffix = (prefix == 1 ? "month" : "months");
+  }
+  else if (parseInt(diff_days*0.143) > 0)
+  {
+    prefix = parseInt(diff_days*0.143);
+    suffix = (prefix == 1 ? "week" : "weeks");
+  }
+  else
+  {
+    prefix = parseInt(diff_days);
+    suffix = (prefix == 1 ? "day" : "days");
+  }
+  suffix = prefix + " " + suffix + " ago"
+  return suffix
+}
+
 function find_date(xhr) {
   var start = xhr.responseText.indexOf('watch-time-text')
   var end = xhr.responseText.indexOf('</strong', start)
   var published_date = xhr.responseText.substring(start+"watch-time-text".length+2, end)
+  published_date = published_date.replace(',', '').split(' ');
+  published_date_len = published_date.length
+  published_date = published_date[published_date_len - 3]
+                  + " " + published_date[published_date_len - 2]
+                  + ", " + published_date[published_date_len - 1]
   return published_date
+}
+
+function make_img_node() {
+  var img = document.createElement('img'),
+      img_url = chrome.extension.getURL("image/loader_gif.gif");
+  img.src = img_url
+  return img
 }
 
 function make_node(date) {
@@ -16,11 +68,18 @@ function make_node(date) {
 function loadURL(url, pos, append_aft) {
   var date, node;
   var xhr=new XMLHttpRequest();
+  if(append_aft.querySelector('img') == null)
+    {
+      append_aft.appendChild(make_img_node());
+    }
   xhr.onreadystatechange = function() {
     if(xhr.status == 200 && xhr.readyState == 4){
       date = find_date(xhr);
+      date = current_date_diff(date);
       node = make_node(date);
-      append_aft.appendChild(node)
+      len = append_aft.children.length
+      append_aft.removeChild(append_aft.children[len - 1])
+      append_aft.appendChild(node);
     }
   };
   xhr.open("GET", url, true);

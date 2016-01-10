@@ -33,3 +33,9 @@ I made it coz I needed it. :wink:
 * ***v2.0.1 -***
 
 	1. fixing double dates when playing playlist
+
+* ***v2.1.1 -***
+
+	1. remove Published/Uploaded prefix from date
+	2. added loader gif
+	3. changed date to time difference
