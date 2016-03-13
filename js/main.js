@@ -42,11 +42,14 @@ function find_date(xhr) {
   var start = xhr.responseText.indexOf('watch-time-text')
   var end = xhr.responseText.indexOf('</strong', start)
   var published_date = xhr.responseText.substring(start+"watch-time-text".length+2, end)
-  published_date = published_date.replace(',', '').split(' ');
-  published_date_len = published_date.length
-  published_date = published_date[published_date_len - 3]
-                  + " " + published_date[published_date_len - 2]
-                  + ", " + published_date[published_date_len - 1]
+  if(/hl=en/.test(document.cookie))
+  {
+    published_date = published_date.replace(/[,.]/g, '').split(' ');
+    published_date_len = published_date.length
+    published_date = published_date[published_date_len - 3]
+                    + " " + published_date[published_date_len - 2]
+                    + ", " + published_date[published_date_len - 1]
+  }
   return published_date
 }
 
@@ -75,7 +78,10 @@ function loadURL(url, pos, append_aft) {
   xhr.onreadystatechange = function() {
     if(xhr.status == 200 && xhr.readyState == 4){
       date = find_date(xhr);
-      date = current_date_diff(date);
+      if(/hl=en/.test(document.cookie))
+      {
+        date = current_date_diff(date);
+      }
       node = make_node(date);
       len = append_aft.children.length
       append_aft.removeChild(append_aft.children[len - 1])

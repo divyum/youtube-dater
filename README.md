@@ -39,3 +39,7 @@ I made it coz I needed it. :wink:
 	1. remove Published/Uploaded prefix from date
 	2. added loader gif
 	3. changed date to time difference
+
+* ***v2.1.2 -***
+
+	1. support all languages
