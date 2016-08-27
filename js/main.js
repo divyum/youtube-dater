@@ -163,16 +163,9 @@ function main(tag) {
       }
     }
 
-    if(tag == 'watch-related' || tag == 'watch-more-related')
-    {
-      url = sidebar_section.children[i].children[0].children[0].getAttribute('href')
-      append_aft = sidebar_section.children[i].children[0].children[0]
-    }
-    else
-    {
-      url = sidebar_section.children[i].children[0].children[0].children[0].getAttribute('href')
-      append_aft = sidebar_section.children[i].children[0].children[0].children[0]
-    }
+    url = sidebar_section.children[i].children[0].children[0].children[0].getAttribute('href')
+    append_aft = sidebar_section.children[i].children[0].children[0].children[0]
+
     loadURL(url, i, append_aft)
   }
 }

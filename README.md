@@ -9,7 +9,7 @@ I made it coz I needed it. :wink:
 
 ### To Install
 
-* From the webstore: [YouTube Video List Dater](https://chrome.google.com/webstore/detail/youtube-video-list-dater/mbaflkdlneldejanggphlhcepncjfaco) 
+* From the webstore: [YouTube Video List Dater](https://chrome.google.com/webstore/detail/youtube-video-list-dater/mbaflkdlneldejanggphlhcepncjfaco)
 
 * For development:
 
@@ -26,7 +26,7 @@ I made it coz I needed it. :wink:
 ### Update
 
 * ***v2.0 -***
-	
+
 	1. publish date of `show more` videos
 	2. run script on dom history change
 
@@ -43,3 +43,7 @@ I made it coz I needed it. :wink:
 * ***v2.1.2 -***
 
 	1. support all languages
+
+* ***v2.1.3 -***
+
+	1. bug fix due to youtube code structure change
