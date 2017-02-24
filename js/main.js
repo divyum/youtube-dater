@@ -33,6 +33,7 @@ function current_date_diff(published_date) {
   {
     prefix = parseInt(diff_days);
     suffix = (prefix == 1 ? "day" : "days");
+    suffix = (prefix == 0 ? "today" : suffix);
   }
   suffix = prefix + " " + suffix + " ago"
   return suffix
@@ -42,7 +43,9 @@ function find_date(xhr) {
   var start = xhr.responseText.indexOf('watch-time-text')
   var end = xhr.responseText.indexOf('</strong', start)
   var published_date = xhr.responseText.substring(start+"watch-time-text".length+2, end)
-  if(/hl=en/.test(document.cookie))
+  var language_button_node = document.getElementById('yt-picker-language-button');
+  var language = language_button_node.getElementsByClassName('yt-uix-button-content')[0].textContent.split(':')[1].trim()
+  if(language == "English")
   {
     published_date = published_date.replace(/[,.]/g, '').split(' ');
     published_date_len = published_date.length
@@ -71,6 +74,8 @@ function make_node(date) {
 function loadURL(url, pos, append_aft) {
   var date, node;
   var xhr=new XMLHttpRequest();
+  var language_button_node = document.getElementById('yt-picker-language-button');
+  var language = language_button_node.getElementsByClassName('yt-uix-button-content')[0].textContent.split(':')[1].trim()
   if(append_aft.querySelector('img') == null)
     {
       append_aft.appendChild(make_img_node());
@@ -78,7 +83,7 @@ function loadURL(url, pos, append_aft) {
   xhr.onreadystatechange = function() {
     if(xhr.status == 200 && xhr.readyState == 4){
       date = find_date(xhr);
-      if(/hl=en/.test(document.cookie))
+      if(language == "English")
       {
         date = current_date_diff(date);
       }
