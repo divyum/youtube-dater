@@ -47,3 +47,7 @@ I made it coz I needed it. :wink:
 * ***v2.1.3 -***
 
 	1. bug fix due to youtube code structure change
+
+* ***v2.1.4 -***
+
+	1. get language from button
