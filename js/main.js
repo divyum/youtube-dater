@@ -13,7 +13,7 @@ function current_date_diff(published_date) {
 
   new_date = new Date(published_year, published_month, publish_day);
   var diff_days = Math.abs((current_date.getTime() - new_date.getTime())/(oneDay));
-  var prefix, suffix;
+  var prefix, suffix, today = false;
   if(parseInt(diff_days) > 365)
   {
     prefix = parseInt(diff_days/365);
@@ -33,9 +33,9 @@ function current_date_diff(published_date) {
   {
     prefix = parseInt(diff_days);
     suffix = (prefix == 1 ? "day" : "days");
-    suffix = (prefix == 0 ? "today" : suffix);
+    today = prefix == 0
   }
-  suffix = prefix + " " + suffix + " ago"
+  suffix = today ? "today" : (prefix + " " + suffix + " ago")
   return suffix
 }
 
