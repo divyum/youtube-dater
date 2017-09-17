@@ -55,3 +55,7 @@ I made it coz I needed it. :wink:
 * ***v2.1.5 -***
 
 	1. add "today" if 0 day
+
+* ***v2.2.6 -***
+
+	1. revamping as per new youtube changes

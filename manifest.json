@@ -1,10 +1,10 @@
 {
   "manifest_version": 2,
 
-  "name": "YouTube Video List Dater ",
+  "name": "YouTube++",
   "short_name": "YTD",
   "description": "This extension shows the publishing or uploading date of related youtube videos in sidebar.",
-  "version": "2.1.5",
+  "version": "2.2.6",
 
   "icons": {
     "48": "image/icon48.png",
