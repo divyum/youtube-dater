@@ -75,7 +75,6 @@ function show_more_mutation() {
   var observer = new MutationObserver(function(mutations) {
     mutations.forEach(function(mutation) {
       if ( mutation.type == 'childList' ) {
-          // console.log("running");
           main('items');
       }
     });
@@ -156,7 +155,6 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     prev = curr
     console.log("new prev = " + prev)
   }
-  // sendResponse("gotcha");
 });
 
 if(window.location.href.indexOf('watch') > -1){
