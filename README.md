@@ -59,3 +59,8 @@ I made it coz I needed it. :wink:
 * ***v2.2.6 -***
 
 	1. revamping as per new youtube changes
+
+* ***v2.3.0 -***
+
+	1. Fixes major issues due to which extension used to fail
+	2. Gets date in real time from html content
