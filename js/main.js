@@ -1,3 +1,5 @@
+const AGO = 'ago'
+
 // This method creates new html node with the information provided
 function create_node(element_type, attribute_map, innerHTML) {
   var node = document.createElement(element_type)
@@ -38,25 +40,21 @@ function get_video_time_diff(video_payload)
 
   // gets the video span info
   video_info_span = video_payload.children[autoplay_video].querySelectorAll('#video-title.ytd-compact-video-renderer')[0]
-  // gets the video time info
-  video_time_span = video_payload.children[autoplay_video].querySelectorAll('.ytd-thumbnail-overlay-time-status-renderer')[0]
-  // gets the video time
-  video_time = video_time_span.getAttribute('aria-label')
   // gets video title
   video_title = video_info_span.getAttribute('title')
   // gets the video info with date
   video_info_with_date = video_info_span.getAttribute('aria-label')
   // gets the video author
-  video_author = video_payload.children[autoplay_video].getElementsByTagName('yt-formatted-string')[0].innerHTML
-  // gets the video author
+  video_author = video_payload.children[autoplay_video].querySelectorAll('#text.ytd-channel-name')[0].innerHTML
+  // gets the video prefix with author
   video_prefix = video_title + " by " + video_author
 
   video_title_index = video_info_with_date.indexOf(video_prefix) + video_prefix.length
-  video_time_index = video_info_with_date.indexOf(video_time)
+  // this will get the starting index of 'ago' after video title and author.
+  start_index_of_ago = video_info_with_date.indexOf(AGO, video_title_index+1)
 
-  // published date is between title + author + published_date + time, so getting it from there. 
-  published_date_diff = video_info_with_date.substring(video_title_index, video_time_index).trim(' ')
-  // console.log("details: " + video_title + " --> " + video_info_with_date + " --> " + video_author + " --> " + published_date_diff)
+  // published date is between title + author + published_date_diff + ago, so getting it from there. 
+  published_date_diff = video_info_with_date.substring(video_title_index, start_index_of_ago).trim(' ') + ' ' + AGO
   return published_date_diff
 }
 
@@ -95,16 +93,26 @@ function display_date(video_payload) {
 function run_main_and_mutation(all_mutation) {
   // This stores if the node already been considered to add date or not and will be processed accordingly.
   var node_with_date_map = {}
+  var prev_node_date_map = {}
   // id 'items' contains the list of all related videos
+  // var checkExist = setInterval(function() {
+  //  if (document.querySelectorAll('#items.style-scope.ytd-watch-next-secondary-results-renderer')) {
+  //     // hack: clear interval when sidebar videos are more than 25. This is based on assumption that sidebar can have max of 40 videos.
+  //     if(Object.keys(node_with_date_map).length >= 30) {
+  //       clearInterval(checkExist)
+  //     }
+  //     prev_node_date_map = main(node_with_date_map)
+  //  }
+  // }, 3000); // check every 300ms
+
+  // id 'items' contains the list of all related videos
+  // This is a never ending function which runs every 5s to update the dates.
   var checkExist = setInterval(function() {
    if (document.querySelectorAll('#items.style-scope.ytd-watch-next-secondary-results-renderer')) {
-      // hack: clear interval when sidebar videos are more than 25. This is based on assumption that sidebar can have max of 40 videos.
-      if(Object.keys(node_with_date_map).length >= 25) {
-        clearInterval(checkExist)
-      }
       prev_node_date_map = main(node_with_date_map)
+      node_with_date_map = prev_node_date_map
    }
-  }, 3000); // check every 300ms
+  }, 5000); // checks every 5s
 }
 
 // Main method which updates the nodes which have already been covered with map. It also renders the date.
@@ -151,4 +159,3 @@ function main(node_with_date_map) {
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
   run_main_and_mutation(true)
 });
-

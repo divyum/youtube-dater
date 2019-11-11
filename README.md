@@ -64,3 +64,7 @@ I made it coz I needed it. :wink:
 
 	1. Fixes major issues due to which extension used to fail
 	2. Gets date in real time from html content
+
+* ***v2.3.1 -***
+
+	1. Fixes to comply with youtube layout changes.
