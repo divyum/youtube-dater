@@ -62,9 +62,13 @@ I made it coz I needed it. :wink:
 
 * ***v2.3.0 -***
 
-	1. Fixes major issues due to which extension used to fail
-	2. Gets date in real time from html content
+	1. fixes major issues due to which extension used to fail
+	2. gets date in real time from html content
 
 * ***v2.3.1 -***
 
-	1. Fixes to comply with youtube layout changes.
+	1. fixes to comply with youtube layout changes.
+
+* ***v2.3.2 -***
+
+	1. speeds up date loading and adds workflow to run 2 intervals, 1 for quick loading and other for lazy loading for dates. 

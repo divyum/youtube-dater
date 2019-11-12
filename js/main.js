@@ -94,21 +94,25 @@ function run_main_and_mutation(all_mutation) {
   // This stores if the node already been considered to add date or not and will be processed accordingly.
   var node_with_date_map = {}
   var prev_node_date_map = {}
-  // id 'items' contains the list of all related videos
-  // var checkExist = setInterval(function() {
-  //  if (document.querySelectorAll('#items.style-scope.ytd-watch-next-secondary-results-renderer')) {
-  //     // hack: clear interval when sidebar videos are more than 25. This is based on assumption that sidebar can have max of 40 videos.
-  //     if(Object.keys(node_with_date_map).length >= 30) {
-  //       clearInterval(checkExist)
-  //     }
-  //     prev_node_date_map = main(node_with_date_map)
-  //  }
-  // }, 3000); // check every 300ms
-
-  // id 'items' contains the list of all related videos
-  // This is a never ending function which runs every 5s to update the dates.
+  // This interval checks the list for quick load initially. Once loaded, it will close and run the interval every 5s
+  // to update the time for newly loaded videos.
   var checkExist = setInterval(function() {
-   if (document.querySelectorAll('#items.style-scope.ytd-watch-next-secondary-results-renderer')) {
+    // id 'items' contains the list of all related videos
+    if (document.querySelectorAll('#items.style-scope.ytd-watch-next-secondary-results-renderer')) {
+      // hack: clear interval when sidebar videos are more than 10. This is based on assumption that sidebar is loaded and
+      // initial loading of dates is done.
+      if(Object.keys(node_with_date_map).length >= 10) {
+        clearInterval(checkExist)
+      }
+      prev_node_date_map = main(node_with_date_map)
+      node_with_date_map = prev_node_date_map
+   }
+  }, 2000); // check every 2s
+
+  // This is a never ending function which runs every 5s to update the dates.
+  var checkExist_5s = setInterval(function() {
+    // id 'items' contains the list of all related videos
+    if (document.querySelectorAll('#items.style-scope.ytd-watch-next-secondary-results-renderer')) {
       prev_node_date_map = main(node_with_date_map)
       node_with_date_map = prev_node_date_map
    }
